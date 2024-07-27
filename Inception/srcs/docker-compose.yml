@@ -1,0 +1,13 @@
+services:
+ nginx:
+  build: ./requirements/nginx/
+  depends_on:
+   - base_img
+  ports: 
+    - "443:443"
+ mariadb:
+  build: ./requirements/mariadb/
+  depends_on:
+   - base_img
+ base_img:
+  build: ./requirements/tools/
