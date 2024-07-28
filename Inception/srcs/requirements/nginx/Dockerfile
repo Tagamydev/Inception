@@ -1,6 +1,6 @@
 # Image of penultimate stable version of Debian.
 #FROM debian:bullseye
-FROM srcs-base_img:latest
+FROM srcs-base_img
 
 # No question/dialog pops up during apt-get install
 ARG DEBIAN_FRONTEND=noninteractive

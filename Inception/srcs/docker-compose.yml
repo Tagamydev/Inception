@@ -4,10 +4,26 @@ services:
   depends_on:
    - base_img
   ports: 
-    - "443:443"
+   - "443:443"
+  networks:
+   - inc_net
+
  mariadb:
   build: ./requirements/mariadb/
   depends_on:
    - base_img
+  networks:
+   - inc_net
+
+ wordpress:
+  build: ./requirements/wordpress/
+  depends_on:
+   - base_img
+  networks:
+   - inc_net
+
  base_img:
   build: ./requirements/tools/
+
+networks:
+ inc_net:
