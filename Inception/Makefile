@@ -6,7 +6,7 @@
 #    By: samusanc <samusanc@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/24 19:28:25 by samusanc          #+#    #+#              #
-#    Updated: 2024/07/27 14:11:17 by samusanc         ###   ########.fr        #
+#    Updated: 2024/07/28 16:51:56 by samusanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,15 +27,21 @@ stop:								# stop all containers
 		docker stop $$(docker ps -aq); \
 	fi
 
+delvol:
+	if [ -n "$$(docker volume ls -qf dangling=true)" ]; then \
+		docker volume rm $$(docker volume ls -qf dangling=true); \
+	fi
+
 re: fclean all
 
-fclean: down clean
+fclean: down clean delvol
 	docker system prune -a -f
-	#aqui va la regla ara destruir todos los volumenes?
+	docker volume prune -a -f
 
+# delete only containers, dont delete images or volumes
 clean: stop
 	if [ -n "$$(docker ps -aq)" ]; then \
 		docker rm $$(docker ps -aq); \
 	fi
 
-.PHONY: all clean fclean re stop down up build
+.PHONY: all clean fclean re stop down up build delvol

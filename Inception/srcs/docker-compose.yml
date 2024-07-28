@@ -3,10 +3,13 @@ services:
   build: ./requirements/nginx/
   depends_on:
    - base_img
+   - wordpress
   ports: 
    - "443:443"
   networks:
    - inc_net
+  volumes:
+   - "wordpress_vol:/var/www/html/"
 
  mariadb:
   build: ./requirements/mariadb/
@@ -21,9 +24,19 @@ services:
    - base_img
   networks:
    - inc_net
+  volumes:
+   - "wordpress_vol:/var/www/html/"
 
  base_img:
   build: ./requirements/tools/
+
+volumes:
+ wordpress_vol:
+  driver: local
+  driver_opts:
+   type: none
+   device: /home/samusanc/data/wordpress
+   o: bind
 
 networks:
  inc_net:

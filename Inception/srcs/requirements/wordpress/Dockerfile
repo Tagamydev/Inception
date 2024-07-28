@@ -20,10 +20,9 @@ EXPOSE 9000
 COPY ./conf/www.conf /
 RUN mv /www.conf /etc/php/$(php --version | awk '{print $2}' | head -1 | head -c 3)/fpm/pool.d/
 
-RUN mkdir -p /var/www/html/wordpress/public_html
 RUN mkdir -p /run/php
 
-WORKDIR /var/www/html/wordpress/public_html/
+WORKDIR /var/www/html/
 
 RUN wget https://wordpress.org/latest.tar.gz
 RUN tar -zxvf latest.tar.gz
