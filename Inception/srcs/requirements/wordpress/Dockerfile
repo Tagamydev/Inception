@@ -6,6 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Update and upgrade packages && Install utility packages
 RUN apt-get install \
+	dos2unix \
 	php \
 	php-cgi \
 	php-mysql \
@@ -22,16 +23,15 @@ RUN mv /www.conf /etc/php/$(php --version | awk '{print $2}' | head -1 | head -c
 
 RUN mkdir -p /run/php
 
-WORKDIR /var/www/html/
+WORKDIR /home/
 
-RUN wget https://wordpress.org/latest.tar.gz
-RUN tar -zxvf latest.tar.gz
-RUN mv wordpress/* .
-RUN rm -rf wordpress
-RUN chown -R www-data:www-data *
-RUN mv wp-config-sample.php wp-config.php
+COPY ./tools/install_wordpress.sh /home/
+RUN chmod +x /home/install_wordpress.sh
+#RUN bash install_wordpress.sh > /home/wordpress_install.log
+ENTRYPOINT ["/home/install_wordpress.sh"]
 
 WORKDIR /
+
 COPY ./tools/start_php.sh /
 
 CMD ["bash", "/start_php.sh"]

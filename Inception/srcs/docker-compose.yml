@@ -10,6 +10,9 @@ services:
    - inc_net
   volumes:
    - "wordpress_vol:/var/www/html/"
+  restart: on-failure
+  env_file:
+   - .env
 
  mariadb:
   build: ./requirements/mariadb/
@@ -17,6 +20,9 @@ services:
    - base_img
   networks:
    - inc_net
+  restart: on-failure
+  env_file:
+   - .env
 
  wordpress:
   build: ./requirements/wordpress/
@@ -26,6 +32,9 @@ services:
    - inc_net
   volumes:
    - "wordpress_vol:/var/www/html/"
+  restart: on-failure
+  env_file:
+   - .env
 
  base_img:
   build: ./requirements/tools/
@@ -36,6 +45,13 @@ volumes:
   driver_opts:
    type: none
    device: /home/samusanc/data/wordpress
+   o: bind
+
+ data_base_vol:
+  driver: local
+  driver_opts:
+   type: none
+   device: /home/samusanc/data/db
    o: bind
 
 networks:
