@@ -1,5 +1,16 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Dockerfile                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: samusanc <samusanc@student.42madrid.com>   +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/07/29 11:13:00 by samusanc          #+#    #+#              #
+#    Updated: 2024/07/29 11:13:06 by samusanc         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Image of penultimate stable version of Debian.
-#FROM debian:bullseye
 FROM srcs-base_img
 
 # No question/dialog pops up during apt-get install

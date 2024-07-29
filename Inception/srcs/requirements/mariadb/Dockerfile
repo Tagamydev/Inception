@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Dockerfile                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: samusanc <samusanc@student.42madrid.com>   +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/07/29 11:13:36 by samusanc          #+#    #+#              #
+#    Updated: 2024/07/29 12:47:10 by samusanc         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Image of penultimate stable version of Debian.
 FROM srcs-base_img
 
@@ -6,6 +18,10 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Update and upgrade packages && Install utility packages
 RUN apt-get install mariadb-server mariadb-client -y
+
+RUN mkdir -p /var/run/mysqld
+RUN chown -R mysql:mysql /var/run/mysqld
+RUN chmod 777 /var/run/mysqld
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 
@@ -17,6 +33,8 @@ WORKDIR /home/
 COPY ./tools/mariadb_config.sh /home/
 RUN chmod +x /home/mariadb_config.sh
 
-RUN ./mariadb_config.sh
+RUN echo $MYSQL_ROOT_PASSWORD > /home/password.tmp
+
+ENTRYPOINT ["/home/mariadb_config.sh"]
 
 CMD ["mysqld_safe"]
