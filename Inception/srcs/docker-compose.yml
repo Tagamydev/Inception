@@ -20,6 +20,8 @@ services:
    - base_img
   networks:
    - inc_net
+  volumes:
+   - "data_base_vol:/var/lib/mysql/"
   restart: on-failure
   env_file:
    - .env
