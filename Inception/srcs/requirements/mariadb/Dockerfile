@@ -6,7 +6,7 @@
 #    By: samusanc <samusanc@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 11:13:36 by samusanc          #+#    #+#              #
-#    Updated: 2024/07/29 12:47:10 by samusanc         ###   ########.fr        #
+#    Updated: 2024/07/29 14:10:44 by samusanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,6 @@ RUN service mariadb start
 WORKDIR /home/
 COPY ./tools/mariadb_config.sh /home/
 RUN chmod +x /home/mariadb_config.sh
-
-RUN echo $MYSQL_ROOT_PASSWORD > /home/password.tmp
 
 ENTRYPOINT ["/home/mariadb_config.sh"]
 

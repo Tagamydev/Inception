@@ -28,6 +28,7 @@ services:
   build: ./requirements/wordpress/
   depends_on:
    - base_img
+   - mariadb
   networks:
    - inc_net
   volumes:
