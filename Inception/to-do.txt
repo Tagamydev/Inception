@@ -1,5 +1,0 @@
-arreglar el makefile el make re etc
-SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');
-FLUSH PRIVILEGES;
-find . -type d -exec chmod 755 {} +
-php --version | awk '{print $2}' | head -1 | head -c 3
