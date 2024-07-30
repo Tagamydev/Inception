@@ -6,7 +6,7 @@
 #    By: samusanc <samusanc@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 11:13:36 by samusanc          #+#    #+#              #
-#    Updated: 2024/07/30 07:11:45 by samusanc         ###   ########.fr        #
+#    Updated: 2024/07/30 07:40:50 by samusanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ RUN chown -R mysql:mysql /var/run/mysqld
 RUN chmod 777 /var/run/mysqld
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+COPY ./tools/wordpress.sql /home/
 
 EXPOSE 3306
 

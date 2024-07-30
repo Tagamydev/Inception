@@ -36,8 +36,8 @@ _EOF_
 
 echo "GRANT ALL ON *.* TO 'jefaso'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD'; FLUSH PRIVILEGES;" | mariadb -u root
 echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE; GRANT ALL ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD'; FLUSH PRIVILEGES;" | mariadb -u root
-mariadb -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /usr/local/bin/wordpress.sql
-# echo "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1');" | mariadb -u root
+mariadb -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /home/wordpress.sql
+echo "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1');" | mariadb -u root
 
 fi
 
