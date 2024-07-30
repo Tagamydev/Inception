@@ -1,0 +1,3 @@
+certificates script
+
+add user to wordpress and update database.sql
