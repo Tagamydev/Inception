@@ -1,6 +1,8 @@
 services:
  nginx:
   build: ./requirements/nginx/
+  image: nginx
+  container_name: nginx
   depends_on:
    - base_img
    - wordpress
@@ -16,6 +18,8 @@ services:
 
  mariadb:
   build: ./requirements/mariadb/
+  image: mariadb
+  container_name: mariadb
   depends_on:
    - base_img
   networks:
@@ -28,6 +32,8 @@ services:
 
  wordpress:
   build: ./requirements/wordpress/
+  image: wordpress
+  container_name: wordpress
   depends_on:
    - base_img
    - mariadb
@@ -41,6 +47,7 @@ services:
 
  base_img:
   build: ./requirements/tools/
+  image: srcs-base_img
 
 volumes:
  wordpress_vol:
