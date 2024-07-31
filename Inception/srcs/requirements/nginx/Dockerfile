@@ -24,6 +24,7 @@ COPY ./tools/sscg.sh /home/
 
 WORKDIR	/home/
 
+COPY ./tools/sscg.sh /home/
 # Generating pem certificates for ssl
 RUN bash sscg.sh
 RUN mv ./key.pem /etc/ssl/private/ && mv ./cert.pem /etc/ssl/certs/
