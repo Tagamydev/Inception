@@ -39,7 +39,7 @@ re: fclean all
 
 fclean: down clean delvol
 	docker system prune -a -f
-	docker volume prune -a -f
+	#docker volume prune -a -f
 
 # delete only containers, dont delete images or volumes
 clean: stop
