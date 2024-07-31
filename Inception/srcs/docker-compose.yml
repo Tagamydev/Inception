@@ -12,6 +12,7 @@ services:
    - inc_net
   volumes:
    - "wordpress_vol:/var/www/html/"
+   - "certificates_vol:/tmp/certi/"
   restart: on-failure
   env_file:
    - .env
@@ -62,6 +63,13 @@ volumes:
   driver_opts:
    type: none
    device: /home/samusanc/data/db
+   o: bind
+
+ certificates_vol:
+  driver: local
+  driver_opts:
+   type: none
+   device: /home/samusanc/data/certificates/
    o: bind
 
 networks:

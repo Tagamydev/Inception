@@ -13,6 +13,13 @@
 # Image of penultimate stable version of Debian.
 FROM srcs-base_img
 
+ARG CERTS_
+
+ARG ssl_path=./tools/certificates/$CERTS_
+
+ARG key_path=./tools/certificates/$CERTS_/key/*.pem
+ARG cert_path=./tools/certificates/$CERTS_/cert/*.pem
+
 # No question/dialog pops up during apt-get install
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -24,11 +31,14 @@ COPY ./tools/sscg.sh /home/
 
 WORKDIR	/home/
 
-COPY ./tools/sscg.sh /home/
 # Generating pem certificates for ssl
-RUN bash sscg.sh
-RUN mv ./key.pem /etc/ssl/private/ && mv ./cert.pem /etc/ssl/certs/
-RUN rm -rf sscg.sh
+# old ^ now the certificates are stored in volume
+#RUN bash sscg.sh
+#RUN mv ./key.pem /etc/ssl/private/ && mv ./cert.pem /etc/ssl/certs/
+COPY ./tools/sscg.sh /home/
+RUN chmod +x /home/sscg.sh
+
+ENTRYPOINT ["/home/sscg.sh"]
 
 # Copy nginx config
 COPY ./conf/nginx.conf /etc/nginx/
